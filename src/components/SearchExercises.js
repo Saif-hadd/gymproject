@@ -10,20 +10,9 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      try {
-        const bodyPartsData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions);
+      const bodyPartsData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions);
 
-        // Check if bodyPartsData is an array before spreading its values
-        if (Array.isArray(bodyPartsData)) {
-          setBodyParts(['all', ...bodyPartsData]);
-        } else {
-          console.error('bodyPartsData is not an array:', bodyPartsData);
-          // Handle the case where bodyPartsData is not an array, e.g., set a default value or log an error
-        }
-      } catch (error) {
-        console.error('Error fetching body parts data:', error);
-        // Handle the error appropriately, e.g., display an error message to the user
-      }
+      setBodyParts(['all', ...bodyPartsData]);
     };
 
     fetchExercisesData();
@@ -35,9 +24,9 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
 
       const searchedExercises = exercisesData.filter(
         (item) => item.name.toLowerCase().includes(search)
-          || item.target.toLowerCase().includes(search)
-          || item.equipment.toLowerCase().includes(search)
-          || item.bodyPart.toLowerCase().includes(search),
+               || item.target.toLowerCase().includes(search)
+               || item.equipment.toLowerCase().includes(search)
+               || item.bodyPart.toLowerCase().includes(search),
       );
 
       window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
